@@ -1,0 +1,23 @@
+#version 330 core 
+
+layout (location = 0) in vec3 inputPosition;
+//layout (location = 1) in vec3 inputColor;
+
+uniform mat4 model;
+//out vec3 color;
+out vec4 Position;
+
+void main() 
+{ 
+	float Positionx;
+	float Positiony;
+	float Positionz;
+
+	gl_Position = model * vec4(inputPosition.x, inputPosition.y, inputPosition.z, 1.0);
+	//color = inputColor;
+
+	Positionx = (inputPosition.x+1)/2;
+	Positiony = (inputPosition.y+1)/2;
+	Positionz = 0;
+	Position = model * vec4(Positionx, Positiony, Positionz, 1.0);
+}
