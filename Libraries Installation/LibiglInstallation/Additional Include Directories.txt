@@ -1,0 +1,1 @@
+$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\Glad\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\libigl-master\include;$(SolutionDir)Dependencies\eigen;%(AdditionalIncludeDirectories)

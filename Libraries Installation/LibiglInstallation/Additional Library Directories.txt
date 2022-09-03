@@ -1,0 +1,1 @@
+$(SolutionDir)Dependencies\GLFW\lib-vc2019;%(AdditionalLibraryDirectories)

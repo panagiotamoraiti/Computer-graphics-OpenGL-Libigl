@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/zoes_/OneDrive/Υπολογιστής/IglTesting/eigen/test/stable_norm.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "stable_norm_5"
+	}
+}

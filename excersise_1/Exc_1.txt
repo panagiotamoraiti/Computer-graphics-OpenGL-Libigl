@@ -1,0 +1,12 @@
+excersise_1
+
+1. 
+Change color intensity with arrows (up, down).
+Change between "solid mode" and "wireframe mode" with w key.
+
+2.
+Move the polygon with w, a, s, d keys and see how it's color based on it's position.
+
+3.
+See the 3 cubes performing rotations.
+

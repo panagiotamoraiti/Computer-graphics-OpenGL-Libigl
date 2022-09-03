@@ -1,0 +1,77 @@
+#version 330 core
+
+out vec4 FragColor;
+
+in VertexOutput {
+    vec3 fragmentPosition;
+    vec2 textureCoordinates;
+    vec3 tangentLightSourcePosition;
+    vec3 tangentViewPosition;
+    vec3 tangentFragmentPosition;
+} fragmentInput;
+
+uniform sampler2D diffuseMap;
+uniform sampler2D normalMap;
+
+uniform vec3 lightSourcePosition;
+uniform vec3 viewPosition;
+
+uniform vec2 resolution;
+uniform float time;
+
+in vec3 normal;
+uniform bool mode_1;
+
+void main()
+{ 
+        /////////////////////////////////////////////////////////////////////
+        vec2 cPos = -1.0 + 2.0 * gl_FragCoord.xy / resolution.xy;
+        float cLength = length(cPos);
+        vec2 uv = gl_FragCoord.xy/resolution.xy+(cPos/cLength)*cos(cLength*12.0-time*4.0)*0.01;
+
+        // get diffuse color
+        vec3 color = texture(diffuseMap, vec2(uv.s, uv.t)).rgb;
+        /////////////////////////////////////////////////////////////////////
+
+    if(mode_1 == true)
+    {   // ambient
+        vec3 ambient = 0.1 * color;
+	    // diffuse
+	    vec3 lightSourceDirection = normalize(lightSourcePosition - fragmentInput.fragmentPosition);	
+	    float diffuseAngle = max(dot(lightSourceDirection, normal), 0);
+	    vec3 diffuse = diffuseAngle * color;
+	    // specular 
+	    vec3 reflectedLightDirection = reflect(-lightSourceDirection, normal);
+	    vec3 viewerDirection = normalize(viewPosition - fragmentInput.fragmentPosition);
+
+        vec3 halfwayDir = normalize(lightSourceDirection + viewerDirection);  
+        float specularAngle = pow(max(dot(reflectedLightDirection, viewerDirection), 0), 32.0f);
+	    //vec3 specular = specularAngle * color;
+        vec3 specular = vec3(0.2) * specularAngle;
+	    
+        FragColor = vec4(ambient + diffuse + specular, 1.0);
+    }
+    else
+    {
+        // obtain normal from normal map in range [0,1]
+        vec3 normal = texture(normalMap, vec2(uv.s, uv.t)).rgb;
+        // transform normal vector to range [-1,1]
+        normal = normalize(normal * 2.0 - 1.0);  // this normal is in tangent space
+   
+        // ambient
+        vec3 ambient = 0.1 * color;
+        // diffuse
+        vec3 lightDir = normalize(fragmentInput.tangentLightSourcePosition - fragmentInput.tangentFragmentPosition);
+        float diff = max(dot(lightDir, normal), 0.0);
+        vec3 diffuse = diff * color;
+        // specular
+        vec3 viewDir = normalize(fragmentInput.tangentViewPosition - fragmentInput.tangentFragmentPosition);
+        vec3 reflectDir = reflect(-lightDir, normal);
+        vec3 halfwayDir = normalize(lightDir + viewDir);  
+        float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
+
+        vec3 specular = vec3(0.2) * spec;
+        FragColor = vec4(ambient + diffuse + specular, 1.0);
+    }
+}
+

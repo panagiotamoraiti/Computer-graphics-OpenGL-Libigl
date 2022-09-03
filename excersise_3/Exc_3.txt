@@ -1,0 +1,13 @@
+excersise_3
+
+1.
+Key 1, the face on the left cube changes the direction in which it is turned.
+Key 2, a new row and a new column of faces appear on the middle cube.
+Key 3, one column and one row of faces are removed on the middle cube.
+Key 4, to toggle the mode from GL_REPEAT to GL_MIRRORED_REPEAT.
+Key 5, letters on the right cube start moving on the t-axis of textures.
+
+With w, a, s, d keys you can move the camera.
+
+2.
+Key 1, enables and disables normal mapping.

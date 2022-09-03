@@ -1,0 +1,1 @@
+$(SolutionDir)Dependencies\GLEW\lib\Release\x64;$(SolutionDir)Dependencies\GLFW\lib-vc2019;%(AdditionalLibraryDirectories)

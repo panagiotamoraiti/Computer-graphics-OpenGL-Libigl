@@ -1,0 +1,67 @@
+#version 330 core
+
+struct Material
+{
+	float shininess;
+	sampler2D container2Texture;
+	sampler2D container2SpecularTexture;
+	//sampler2D matrixTexture;
+};
+
+uniform Material material;
+
+struct LightSource
+{
+	vec3 direction; // only for direcdtional light
+
+	vec3 ambientColor;
+	vec3 diffuseColor;
+	vec3 specularColor;
+};
+
+uniform LightSource lightSource;
+in vec3 normal;
+in vec3 fragmentPosition;
+in vec2 textureCoordiantes;
+uniform vec3 cameraPosition;
+float mixAmount = 0.5;
+
+uniform sampler2D matrixTexture;
+vec3 texture1;
+uniform float dt;
+vec2 textureCoordiantes2 = vec2(textureCoordiantes.x,textureCoordiantes.y + dt);
+
+void main()
+{
+	// ambient
+	vec3 ambientColor = texture(material.container2Texture, textureCoordiantes).rgb * lightSource.ambientColor;
+	
+	// diffuse
+	vec3 normal = normalize(normal);
+	vec3 lightSourceDirection = normalize(-lightSource.direction); //	only for direcdtional light
+	// A . B = |A| * |B| * cosè ---- |A| and |B| equals 1 if they are unit vectors, which they are.
+	float diffuseAngle = max(dot(lightSourceDirection, normal), 0);
+	vec3 diffuseColor = diffuseAngle * lightSource.diffuseColor * texture(material.container2Texture, textureCoordiantes).rgb;
+
+	// specular 
+	vec3 reflectedLightDirection = reflect(-lightSourceDirection, normal);
+	vec3 viewerDirection = normalize(cameraPosition - fragmentPosition);
+	float specularAngle = pow(max(dot(reflectedLightDirection, viewerDirection), 0), material.shininess);
+	vec3 specularColor = specularAngle * lightSource.specularColor * texture(material.container2SpecularTexture, textureCoordiantes).rgb;
+	
+	if(texture(material.container2SpecularTexture, textureCoordiantes).rgb==vec3(0, 0, 0))
+	{
+		//ambientColor += texture(matrixTexture, textureCoordiantes).rgb * lightSource.ambientColor;
+		//diffuseColor += diffuseAngle * lightSource.diffuseColor * texture(matrixTexture, textureCoordiantes).rgb;
+		texture1 = texture(matrixTexture, textureCoordiantes2).rgb;
+	}
+	else
+	{
+		texture1 = vec3(0, 0, 0);
+	}
+	
+	//vec4 tex = vec4(texture1, 0);
+	vec3 finalColor = ambientColor + diffuseColor + specularColor + texture1;
+	//gl_FragColor = mix(tex, vec4(finalColor, 1.0), 0.5);
+	gl_FragColor = vec4(finalColor, 1.0);
+}

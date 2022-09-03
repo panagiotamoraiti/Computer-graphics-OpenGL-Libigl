@@ -1,0 +1,12 @@
+excersise_4
+
+1.
+With space key, you can load different objects to every viewpoint or load the objects you had in the beginning.
+
+2.
+By left-clicking on one of the objects from the different viewports you can select a face (triangle) and the closest vertex from the mouse position. For the selected vertex you
+find 1-ring and 2-ring neighborhood the faces of which they will be painted in red and green, respectively. Also, the normal vectors of the faces of the 1-ring and 2-ring 
+neighborhood will be painted in yellow color.
+
+3.
+With the help of ImGui a menu is created.

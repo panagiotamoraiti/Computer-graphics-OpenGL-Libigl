@@ -1,0 +1,9 @@
+excersise_2
+
+You can see the cubes that are made of different materials.
+With key 1 you can deactivate or activate point light sources.
+With key 2 you can deactivate or activate directional light sources.
+With the cursor you can change the camera's view.
+With E key you can move the camera up.
+With Q key you can move the camera down.
+With Left Shift pressed, camera's speed increases when we move it up or down.

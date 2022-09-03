@@ -1,0 +1,14 @@
+#version 330 core 
+
+//uniform float red;
+//uniform float green;
+//in vec3 color;
+in vec4 Position;
+
+
+void main() 
+{ 
+	//gl_FragColor = vec4(red, green ,0.0f , 1.0f);
+	//gl_FragColor = vec4(color, 1.0f);
+	gl_FragColor = vec4(Position);
+}

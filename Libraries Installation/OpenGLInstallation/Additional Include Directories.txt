@@ -1,0 +1,1 @@
+$(ProjectDir)src;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;%(AdditionalIncludeDirectories)

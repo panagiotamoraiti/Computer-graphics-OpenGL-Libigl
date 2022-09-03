@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/zoes_/OneDrive/Υπολογιστής/IglTesting/eigen/test/product_notemporary.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "product_notemporary_1"
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/zoes_/OneDrive/Υπολογιστής/IglTesting/eigen/test/array_replicate.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "array_replicate_4"
+	}
+}
